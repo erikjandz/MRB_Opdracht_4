@@ -14,11 +14,15 @@ def init_arduino():
 
 
 def write_to_arduino(arduino, value):
-    valueToWrite = 220 - (value + 110)
+    valueToWrite = 110 - value
     if valueToWrite == 90:
         valueToWrite = 91
+    if valueToWrite <= 75:
+        valueToWrite = 75
+    elif valueToWrite > 145:
+        valueToWrite = 145
     arduino.write(struct.pack('>B', valueToWrite))
 
-
+#
 # arduino = init_arduino()
 # write_to_arduino(arduino, 0)
